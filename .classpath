@@ -2,10 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/JVnTextPro-v2.0/jvntextpro.jar"/>
-	<classpathentry kind="lib" path="lib/jmdn-base.jar"/>
-	<classpathentry kind="lib" path="lib/JVnTagger-v3.0/JVnTagger.jar"/>
-	<classpathentry kind="lib" path="lib/standford-postagger/stanford-postagger.jar"/>
-	<classpathentry kind="lib" path="lib/vnTagger/vn.hus.nlp.tagger-4.2.0.jar"/>
+	<classpathentry kind="lib" path="lib/mallet-deps.jar"/>
+	<classpathentry kind="lib" path="lib/mallet.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,0 +1,2 @@
+# Train
+java -classpath /Applications/Development/Mallet/class:/Applications/Development/Mallet/lib/mallet-deps.jar cc.mallet.fst.SimpleTagger --train true --test lab --training-proportion 0.9 --model-file model.txt --iterations 5000 --threads 2 data/train.txt
