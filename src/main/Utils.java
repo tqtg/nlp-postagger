@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,15 +35,21 @@ public class Utils {
 	
 	public static void writeFile(List<String> lines, String pathname) {
 		try {
-			File f = new File(pathname);
-			f.mkdirs();
+//			File f = new File(pathname);
+//			f.createNewFile();
+//			
+//			FileWriter fw = new FileWriter(f);
+//			for (String line : lines) {
+//				fw.write(line + "\n");
+//			}
+//			
+//			fw.close();
 			
-			FileWriter fw = new FileWriter(f);
+			PrintWriter writer = new PrintWriter(pathname, "UTF-8");
 			for (String line : lines) {
-				fw.write(line + "\n");
+				writer.println(line);
 			}
-			
-			fw.close();
+			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
