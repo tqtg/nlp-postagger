@@ -111,14 +111,14 @@ public class GenTrainingData {
 			trainSequences.add(text2Sequence(line));
 		}
 
-		trainFile.clear();
-
 		for (Sequence sequence : trainSequences) {
+			trainFile.clear();
 			trainFile.addAll(genSequenceFeatures(sequence));
 			trainFile.add("");
+			Utils.appendFile(trainFile, args[1]);
 		}
 
-		Utils.writeFile(trainFile, args[1]);
+//		Utils.writeFile(trainFile, args[1]);
 
 		System.out.println("Generate training file completely!");
 	}

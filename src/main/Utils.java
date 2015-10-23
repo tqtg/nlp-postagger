@@ -1,6 +1,7 @@
 package main;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -62,5 +63,14 @@ public class Utils {
 		}
 		
 		return line.trim();
+	}
+	
+	public static void appendFile(List<String> lines, String pathname) {
+		try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(pathname, true)))) {
+		    for (String line : lines)
+		    	out.println(line);
+		}catch (IOException e) {
+		    //exception handling left as an exercise for the reader 
+		} 
 	}
 }
