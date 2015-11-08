@@ -4,5 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/mallet-deps.jar"/>
 	<classpathentry kind="lib" path="lib/mallet.jar"/>
+	<classpathentry kind="lib" path="lib/jmdn-base.jar"/>
+	<classpathentry kind="lib" path="lib/jmdn-methods.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

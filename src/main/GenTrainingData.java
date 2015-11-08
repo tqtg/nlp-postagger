@@ -25,8 +25,8 @@ import java.util.Map;
  * 11: current word is punctuation mark
  * 12: current word is full repetitive word
  * 13: current word is rhythm repetitive word
- * 14: prefix
- * 15: suffix
+ * 14: prefix before '-' character
+ * 15: suffix after '-' character
  * 16: all characters of current word is none lowercase
  * 17: current word is in middle of sentence and has uppercase character
  * 18: current word contains number and hyphen
@@ -34,6 +34,9 @@ import java.util.Map;
  * 20: number of characters of current word
  * 21: all syllables of current word are capitalized
  * 22: current word contains only uppercase characters and number
+ * 23: current word cluster from clusters dictionary
+ * 24: prefix n-char
+ * 25: suffix n-char
  * 
  */
 
@@ -42,13 +45,37 @@ public class GenTrainingData {
 	private static final String TRAIN_FILE = "data/train_0.txt";
 	private static final String TEST_FILE = "data/test_0.txt";
 	private static final String DEFAULT_E_DICT = "data/ComputerDict.txt";
+	private static final String CLUSTERS = "data/clusters.txt";
 
 	private static Map word2dictags = new HashMap<String, List>();
+	private static Map clusters = new HashMap<String, Integer>();
 
 	static {
 		readDict();
+		readCluster();
 	}
 
+	public static boolean readCluster() {
+		try {
+			List<String> lines = Utils.readFile(CLUSTERS);
+			clusters.clear();
+			
+			for (String line : lines) {
+				String[] tokens = line.split("\t");
+				if (tokens.length != 2) continue;
+				clusters.put(tokens[0], tokens[1]);				
+			}
+			
+			System.out.println("Clusters reading done!");
+			System.out.println("Number of clusters: " + clusters.size());
+			
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	public static boolean readDict(){
 		try {
 			List<String> lines = Utils.readFile(DEFAULT_E_DICT);
@@ -386,6 +413,17 @@ public class GenTrainingData {
 		
 		if (curWord.matches("[A-Z]+(_)?(\\d)*$"))
 			cpsList.add("22:un");
+		
+		// clusters
+		if (clusters.containsKey(curWord))
+			cpsList.add("23:cl:" + clusters.get(curWord));
+		
+		for (int i = 1; i <= 10; i++) {
+			if (curWord.length() > i + 1) {
+				cpsList.add("24:pf:" + curWord.substring(0, i));
+				cpsList.add("25:sf:" + curWord.substring(curWord.length() - i));
+			}
+		}
 			
 		return cpsList;
 	}

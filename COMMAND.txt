@@ -1,8 +1,11 @@
+# Generate training data
+java -classpath nlp-postagger.jar main.GenTrainingData data/train_0.txt data/train.tagged
+
+# Train with jmdn on Mac
+java -classpath lib/args4j-2.0.6.jar:lib/jmdn-base.jar:lib/jmdn-methods.jar jmdn.method.classification.maxent.Trainer -all -d data
+
 # Train with Mallet on Mac
 java -classpath /Applications/Development/Mallet/class:/Applications/Development/Mallet/lib/mallet-deps.jar cc.mallet.fst.SimpleTagger --train true --test lab --training-proportion 0.9 --model-file model.txt --iterations 5000 --threads 2 data/train.txt
 
 # Train with Mallet on Ubuntu (Digital Ocean)
 java -classpath /root/Mallet/class:/root/Mallelib/mallet-deps.jar cc.mallet.fst.SimpleTagger --train true --test lab --training-proportion 0.8 --model-file model.txt --iterations 2000 --threads 4 data/test.tagged
-
-# Generate training data
-java -classpath nlp-postagger.jar main.GenTrainingData data/train_0.txt train.tagged
